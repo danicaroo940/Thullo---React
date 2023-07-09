@@ -1,17 +1,19 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faListUl } from '@fortawesome/free-solid-svg-icons';
-
+import { QueueListIcon, LockClosedIcon } from "@heroicons/react/20/solid";
 interface Props {
     title: string;
     typeButton?: 'primary' | 'secondary' | 'tertiary';
+    icon?: 'appList' | 'lock'
+  
 }
 
-export const Button = ({ title, typeButton = 'primary' }: Props) => {
+export const Button = ({ title, typeButton = 'primary', icon = "appList" }: Props) => {
     const typeSwitch = {
         primary: (): JSX.Element => {
             return (
                 <button className="bg-[#F2F2F2] rounded-lg px-4 py-2 mr-4 flex flex-row items-center">
-                    <FontAwesomeIcon icon={faListUl} color="#828282" />
+                  { icon === 'lock' ? <LockClosedIcon className="w-4 h-4 text-[#828282]" /> 
+                                    : <QueueListIcon className="w-4 h-4 text-[#828282]" /> 
+                    }
                     <span className="pl-3 text-[#828282] font-[500]">
                         {title}
                     </span>
@@ -31,7 +33,6 @@ export const Button = ({ title, typeButton = 'primary' }: Props) => {
 
         tertiary: (): void => {
             <button className="bg-[#0868f8] rounded-sm flex flex-row items-center">
-                <FontAwesomeIcon icon={faListUl} color="#828282" />
                 <span className="pl-3 text-[#828282] font-[500]">{title}</span>
             </button>;
         },

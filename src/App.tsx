@@ -1,9 +1,9 @@
-import { MainLayaout } from "./layout/MainLayaout"
+import { BoardScreen } from "./screens/BoardScreen"
 
 function App() {
 
   return (
-    <MainLayaout />
+    <BoardScreen />
   )
 }
 
