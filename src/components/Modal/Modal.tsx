@@ -50,7 +50,9 @@ export const Modal = ({ handleClose }: Props) => {
     return (
         <>
             {
-                <div className="backdrop-blur-sm fixed bg-black bg-opacity-10 w-[100%] h-[100%] z-10 top-0 left-0 flex flex-col justify-center items-center">
+                <div
+                    className="backdrop-blur-sm fixed bg-black bg-opacity-10 w-[100%] h-[100%] z-10 top-0 left-0 flex flex-col justify-center items-center"
+                    onClick={handleClose}>
                     <div className="fixed bg-white rounded-lg w-[19.1875rem] h-[16.9375rem] flex flex-col items-center px-6 py-7 gap-4">
                         {preview ? (
                             <>

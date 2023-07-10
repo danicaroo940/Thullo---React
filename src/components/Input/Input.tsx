@@ -19,8 +19,8 @@ export const Input = ({ type = 'searchBar', title, w, h, event }: Props) => {
                         placeholder={title}
                         className="drop-shadow pl-2 rounded-lg flex flex-row items-center w-[338px] h-[34px] "
                     />
-                    <div className="absolute -right-4  top-0.5">
-                        <Button title="Search" typeButton="secondary" w="7.5rem" h="2rem" />
+                    <div className="absolute right-0 top-0">
+                        <Button title="Search" typeButton="secondary" w="5rem" h="32px" />
                     </div>
                 </div>
             );

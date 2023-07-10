@@ -9,7 +9,7 @@ import { getBoards } from '../services/Services';
 
 export const BoardScreen = () => {
   const [showModal, setShowModal] = useState(false);
-  const [boards, setBoards] = useState();
+  const [boards, setBoards] = useState<any>(null);
 
   const handleClose = () => {
     setShowModal(false);
@@ -36,8 +36,8 @@ useEffect(() => {
         </div>
 
         <div className='flex flex-row justify-center flex-wrap gap-3'>
-          {boards && boards.map((board:any, key) => {
-            return <Card id={key} title={board.attributes.title} image={board.attributes.image.data.attributes.url}/>
+          {boards && boards.map((board:any, key:number) => {
+            return <Card key={key} id={board.id} title={board?.attributes?.title} image={board?.attributes?.image?.data?.attributes?.url}/>
           })}
   
         </div>

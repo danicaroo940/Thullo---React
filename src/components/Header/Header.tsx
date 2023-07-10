@@ -1,3 +1,4 @@
+import { Avatar } from "../Avatar/Avatar"
 import { Button } from "../Button/Button"
 import { Input } from "../Input/Input"
 
@@ -10,7 +11,11 @@ export const Header = () => {
         <span > DevChallenges Board </span>
         <span className="border-l h-8 mx-4 border-r-zinc-700"></span>
         <Button title="All board"  typeButton="primary" w="8rem" h="2rem"/>
-        <Input title="Search" />
+        <Input title="Search" type="searchBar" />
+        <div className="absolute right-5 flex justify-center items-center">
+          <p className="text-[#333333] font-[500] self-start px-3 text-base mt-2.5 truncate overflow-hidden">Login / Register</p>
+          <Avatar/>
+        </div>
       </div>
     </>
   )
