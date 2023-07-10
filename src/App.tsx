@@ -1,10 +1,7 @@
-import { BoardScreen } from "./screens/BoardScreen"
+import { AppRoutes } from "./routes/AppRoutes"
 
 function App() {
-
-  return (
-    <BoardScreen />
-  )
+  return <AppRoutes />
 }
 
 export default App
