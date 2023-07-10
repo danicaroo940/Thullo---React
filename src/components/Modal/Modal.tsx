@@ -1,4 +1,5 @@
 import LockClosedIcon from '@heroicons/react/24/outline/LockClosedIcon';
+import { LockOpenIcon } from '@heroicons/react/24/outline';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { useState } from 'react';
@@ -12,6 +13,7 @@ export const Modal = ({ handleClose }: Props) => {
     const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
     const [title, setTitle] = useState<string>('');
     const [fileToAdd, setFileToAdd] = useState<any>(null);
+    const [privBoard, setPrivBoard] = useState(false);
 
     const handlePreview = (e: any) => {
         const file = e?.target.files[0];
@@ -23,6 +25,10 @@ export const Modal = ({ handleClose }: Props) => {
         };
     };
 
+    const handlePrivate = () => {
+        setPrivBoard(!privBoard);
+    };
+
     const handleTitle = (e: any) => {
         setTitle(e.target.value);
     };
@@ -31,12 +37,15 @@ export const Modal = ({ handleClose }: Props) => {
         setPreview(null);
     };
 
-    const handleCreate = () => {      
-        try {
-            createBoard(title, fileToAdd);
-        } catch (error) {
-            console.log(error);
-        }
+    const handleCreate = () => {
+        createBoard(title, fileToAdd, privBoard)
+            .then(() => {
+                handleClose();
+                alert('Board created successfully');
+            })
+            .catch(() => {
+                alert('Error creating board');
+            });
     };
     return (
         <>
@@ -65,27 +74,32 @@ export const Modal = ({ handleClose }: Props) => {
                                 alt=""
                             />
                         )}
+                        <Input
+                            title="Add Board Title"
+                            type="inputText"
+                            event={(e) => handleTitle(e)}
+                        />
+                        <div className="flex flex-row justify-center items-center gap-1">
                             <Input
-                                title="Add Board Title"
-                                type="inputText"
-                                event={(e) => handleTitle(e)}
+                                title="Cover"
+                                type="inputFileAsButton"
+                                w="7.5rem"
+                                h="2rem"
+                                event={(e) => handlePreview(e)}
                             />
-                            <div className="flex flex-row justify-center items-center gap-1">
-                                <Input
-                                    title="Cover"
-                                    type="inputFileAsButton"
-                                    w="7.5rem"
-                                    h="2rem"
-                                    event={(e) => handlePreview(e)}
-                                />
-                                <Button
-                                    title="Private"
-                                    typeButton="primary"
-                                    w="7.5rem"
-                                    h="2.1rem">
+                            <Button
+                                title="Private"
+                                typeButton="primary"
+                                w="7.5rem"
+                                h="2.1rem"
+                                onClick={handlePrivate}>
+                                {privBoard ? (
                                     <LockClosedIcon className="w-4 h-4 text-[#828282]" />
-                                </Button>
-                            </div>
+                                ) : (
+                                    <LockOpenIcon className="w-4 h-4 text-[#828282]" />
+                                )}
+                            </Button>
+                        </div>
                         <div className="flex flex-row justify-end items-center gap-1 w-[100%]">
                             <Button
                                 title="Cancel"
@@ -93,15 +107,13 @@ export const Modal = ({ handleClose }: Props) => {
                                 w="5rem"
                                 h="2rem"
                                 onClick={handleClose}></Button>
-                            <Button 
-                                title="Create" 
-                                typeButton="secondary" 
-                                w="5rem" 
-                                h="2rem" 
+                            <Button
+                                title="Create"
+                                typeButton="secondary"
+                                w="5rem"
+                                h="2rem"
                                 onClick={handleCreate}></Button>
-
                         </div>
-       
                     </div>
                 </div>
             }

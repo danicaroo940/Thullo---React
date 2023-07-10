@@ -2,15 +2,14 @@ import axios from "axios";
 
 const API_URL = "http://localhost:2222";
 
-
-export const createBoard = async (title: string, image: any) => {
+export const createBoard = async (title: string, image: any, privBoard: boolean) => {
   const config = {
     headers: {
       "Content-Type": "multipart/form-data",
     },
   };
   try {
-    const createBoard = await axios.post(`${API_URL}/api/boards`, { data: { title } });
+    const createBoard = await axios.post(`${API_URL}/api/boards`, { data: { title, private: privBoard } });
     if (createBoard.data) {
       const imgFormData = new FormData();
       imgFormData.append("files", image);
@@ -28,3 +27,13 @@ export const createBoard = async (title: string, image: any) => {
 
 
 }
+
+export const getBoards = async () => {
+  try {
+    const boards = await axios.get(`${API_URL}/api/boards?populate=*`);
+    return boards.data;
+  }
+  catch (error) {
+    console.log(error);
+  }
+};
