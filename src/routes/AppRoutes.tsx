@@ -1,6 +1,6 @@
-import { Routes, Route } from 'react-router-dom'
-import { MainScreen } from '../screens/MainScreen'
-import { BoardScreen } from '../screens/BoardScreen'
+import { Routes, Route } from 'react-router-dom';
+import { MainScreen } from '../screens/MainScreen';
+import { BoardScreen } from '../screens/BoardScreen';
 
 export const AppRoutes = () => {
   return (
@@ -8,5 +8,5 @@ export const AppRoutes = () => {
       <Route path="/" element={<MainScreen />} />
       <Route path="/boards/:id" element={<BoardScreen />} />
     </Routes>
-  )
-}
+  );
+};
